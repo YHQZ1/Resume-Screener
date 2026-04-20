@@ -110,7 +110,7 @@ Respond with ONLY a valid JSON object. No markdown, no explanation, no extra tex
 
     try:
         response = get_client().chat.completions.create(
-            model="llama3.1",
+            model="qwen3:0.6b",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.2,
         )

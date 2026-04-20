@@ -13,7 +13,6 @@ try:
 except Exception as e:
     raise RuntimeError(f"Failed to load SBERT model: {e}")
 
-
 def score(
     resume_clean: str,
     jd_clean: str,
