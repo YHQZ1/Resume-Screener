@@ -1,32 +1,49 @@
+# --- Python ---
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
+*$py.class
+*.so
 .Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
 *.egg-info/
+.eggs/
 dist/
 build/
-.eggs/
-venv/
-env/
-.venv/
-.env
-.env.local
-.env.production
-.cache/
 *.bin
 *.pt
 *.onnx
+
+# --- Node/Frontend ---
 node_modules/
 .next/
 out/
+build/
+dist/
 .vercel/
 *.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Environment/Secrets ---
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# --- OS/IDE ---
 .vscode/
 .idea/
 *.swp
 *.swo
 .DS_Store
 Thumbs.db
-*.log
+
+# --- Project Specific ---
 logs/
+*.log

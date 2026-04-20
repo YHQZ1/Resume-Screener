@@ -1,0 +1,32 @@
+# Ignore local environments
+venv/
+.venv/
+env/
+node_modules/
+
+# Ignore version control and IDEs
+.git
+.gitignore
+.vscode/
+.idea/
+
+# Ignore local caches and logs
+__pycache__/
+*.log
+.cache/
+.DS_Store
+
+# Ignore build artifacts
+dist/
+build/
+*.egg-info/
+
+# Ignore secrets (Docker uses env_file or environment in compose instead)
+.env
+.env.*
+
+# Ignore large model files if they exist locally 
+# (Ollama handles models in its own volume)
+*.bin
+*.pt
+*.onnx
