@@ -1,0 +1,43 @@
+JOB TITLE: DevOps / Platform Engineer
+LOCATION: Remote (India only)
+EMPLOYMENT TYPE: Full-time
+
+ABOUT THE COMPANY:
+We are a cloud-native startup building a developer productivity platform. Our customers are engineering teams at mid-to-large enterprises. We are looking for a DevOps engineer to build and maintain our AWS infrastructure.
+
+RESPONSIBILITIES:
+- Design, implement, and manage AWS infrastructure using Terraform (Infrastructure as Code)
+- Build and maintain Kubernetes clusters (EKS) for microservices deployment
+- Set up CI/CD pipelines using GitHub Actions, ArgoCD, or Jenkins
+- Implement observability stack (Prometheus, Grafana, Loki, Tempo)
+- Manage secrets and access control using Vault and IAM policies
+- Optimize cloud costs and resource utilization
+- Participate in incident response and blameless post-mortems
+
+REQUIRED SKILLS (Must-have):
+- 4+ years of DevOps or SRE experience
+- Strong experience with AWS (EC2, EKS, RDS, S3, VPC, IAM)
+- Proficiency with Terraform or Pulumi
+- Hands-on experience with Kubernetes (EKS, kops, or vanilla K8s)
+- Experience with CI/CD tools (GitHub Actions, GitLab CI, or Jenkins)
+- Knowledge of containerization (Docker, container security)
+- Scripting skills in Bash or Python
+
+NICE-TO-HAVE SKILLS:
+- Kubernetes certifications (CKA, CKAD, CKS)
+- Experience with service mesh (Istio, Linkerd)
+- Knowledge of GitOps (ArgoCD, Flux)
+- Experience with monitoring tools (Datadog, New Relic)
+- Experience with security scanning (Trivy, Falco, OPA)
+
+EDUCATION & EXPERIENCE:
+- Bachelor's degree in Computer Science or related field (or equivalent experience)
+- 4-8 years of DevOps/SRE experience
+
+WHAT WE OFFER:
+- Competitive salary (₹22-38 LPA)
+- 100% remote with home office setup allowance
+- Annual cloud certification reimbursement (AWS, CKA, etc.)
+- 30 days of paid time off
+
+TO APPLY: Send your resume to devops-careers@example.com

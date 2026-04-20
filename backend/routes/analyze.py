@@ -10,6 +10,7 @@ from backend.models.schemas import AnalyzeResponse
 router = APIRouter()
 MAX_FILE_SIZE = 5 * 1024 * 1024
 
+
 @router.post("/analyze", response_model=List[AnalyzeResponse])
 async def analyze(
     resumes: List[UploadFile] = File(...),
@@ -32,10 +33,8 @@ async def analyze(
         raise HTTPException(status_code=422, detail="Provide a Job Description.")
 
     jd_clean = preprocess(jd_raw)
-    
-    # Pre-calculate JD embedding once to optimize batch processing
     jd_embedding = sbert_model.encode(jd_raw, convert_to_tensor=True)
-    
+
     results = []
 
     for resume in resumes:
@@ -45,20 +44,23 @@ async def analyze(
                 continue
 
             resume_raw = extract_text(resume_bytes, resume.filename)
+            if not resume_raw.strip():
+                logging.warning(
+                    f"Empty content extracted from {resume.filename}, skipping."
+                )
+                continue
+
             resume_clean = preprocess(resume_raw)
             entities = extract_entities(resume_raw)
-            
-            # 1. Analyze skills first to get weighted coverage
             skills_data = analyze_skills(resume_raw, jd_raw)
-            
-            # 2. Pass coverage and cached JD embedding to scorer
+
             scores = score(
-                resume_clean, 
-                jd_clean, 
-                resume_raw, 
-                jd_raw, 
+                resume_clean,
+                jd_clean,
+                resume_raw,
+                jd_raw,
                 skill_coverage=skills_data["skill_coverage"],
-                jd_embedding=jd_embedding
+                jd_embedding=jd_embedding,
             )
 
             results.append(
@@ -73,6 +75,8 @@ async def analyze(
                     matched_skills=skills_data["matched_skills"],
                     missing_skills=skills_data["missing_skills"],
                     suggestions=skills_data["suggestions"],
+                    jd_raw=jd_raw,
+                    resume_raw=resume_raw,
                 )
             )
         except Exception as e:

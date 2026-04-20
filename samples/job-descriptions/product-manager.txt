@@ -1,0 +1,43 @@
+JOB TITLE: Product Manager - B2B SaaS
+LOCATION: Gurgaon, India (On-site)
+EMPLOYMENT TYPE: Full-time
+
+ABOUT THE COMPANY:
+We are a B2B SaaS company building an AI-powered customer support platform. Our product is used by 200+ mid-market companies to reduce ticket volume and improve CSAT scores.
+
+RESPONSIBILITIES:
+- Define product vision, strategy, and roadmap for one of our core product lines
+- Conduct customer interviews, surveys, and usability testing to identify pain points
+- Write detailed PRDs (Product Requirements Documents) with user stories and acceptance criteria
+- Prioritize backlog using frameworks like RICE, MoSCoW, or Kano
+- Collaborate with engineering, design, and marketing teams to ship features
+- Define and track success metrics (KPIs) such as adoption, retention, and NPS
+- Conduct competitive analysis and market research
+
+REQUIRED SKILLS (Must-have):
+- 3+ years of product management experience (SaaS experience preferred)
+- Strong understanding of agile methodologies (Scrum or Kanban)
+- Experience writing PRDs and managing backlogs in JIRA or Asana
+- Ability to analyze data using SQL, Mixpanel, Amplitude, or Google Analytics
+- Basic understanding of web technologies (REST APIs, frontend/backend concepts)
+- Excellent communication and stakeholder management skills
+
+NICE-TO-HAVE SKILLS:
+- Experience with AI/ML products or chatbots
+- Technical background (CS degree or prior engineering experience)
+- Experience with Figma or prototyping tools
+- MBA or product management certification (CSPO, Pragmatic Institute)
+- Experience with B2B enterprise sales cycles
+
+EDUCATION & EXPERIENCE:
+- Bachelor's degree in Business, Computer Science, or related field
+- 3-7 years of product management experience
+- MBA is a plus but not required
+
+WHAT WE OFFER:
+- Competitive salary (₹18-28 LPA)
+- Performance-based bonuses (up to 20%)
+- Health insurance for family
+- Product conference budget (ProductCon, Mind the Product)
+
+TO APPLY: Send your resume and a short product case study to product-jobs@example.com

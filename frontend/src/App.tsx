@@ -62,7 +62,7 @@ export default function App() {
       {!results ? (
         <UploadPage onSubmit={handleSubmit} loading={loading} />
       ) : activeCandidate ? (
-        <ResultPage result={activeCandidate} />
+        <ResultPage key={activeCandidate.filename} result={activeCandidate} />
       ) : (
         <BatchPage results={results} onViewCandidate={setActiveCandidate} />
       )}

@@ -1,0 +1,41 @@
+JOB TITLE: Data Scientist - Machine Learning
+LOCATION: Pune, India (Hybrid)
+EMPLOYMENT TYPE: Full-time
+
+ABOUT THE COMPANY:
+We are an e-commerce analytics platform helping D2C brands optimize pricing, inventory, and customer retention. We process over 1 billion events per month and use ML to drive business decisions.
+
+RESPONSIBILITIES:
+- Develop and deploy machine learning models for churn prediction, product recommendation, and demand forecasting
+- Perform exploratory data analysis (EDA) on large-scale datasets (millions of rows)
+- Build feature engineering pipelines and maintain feature stores
+- Design and analyze A/B tests to measure model impact
+- Collaborate with data engineers to productionize models using MLflow and Kubernetes
+- Communicate findings to non-technical stakeholders via dashboards and presentations
+
+REQUIRED SKILLS (Must-have):
+- 3+ years of experience in data science or ML engineering
+- Strong Python skills (pandas, numpy, scikit-learn, xgboost/lightgbm)
+- Experience with SQL for data extraction and aggregation
+- Understanding of machine learning algorithms (regression, classification, clustering, time series)
+- Familiarity with A/B testing and statistical inference (p-values, confidence intervals)
+- Experience with at least one visualization tool (Tableau, Power BI, or matplotlib/seaborn)
+
+NICE-TO-HAVE SKILLS:
+- Experience with deep learning (TensorFlow, PyTorch)
+- Knowledge of MLOps tools (MLflow, Kubeflow, or DVC)
+- Experience with big data technologies (PySpark, Dask, or Snowflake)
+- Experience with LLMs or generative AI (LangChain, Hugging Face)
+- Kaggle competition experience or published research
+
+EDUCATION & EXPERIENCE:
+- Master's or PhD in Data Science, Statistics, Computer Science, or related field
+- 3-7 years of industry experience
+
+WHAT WE OFFER:
+- Competitive salary (₹18-30 LPA)
+- Flexible work hours
+- Access to Kaggle competitions (paid entries)
+- Conference budget (NeurIPS, ICML, KDD)
+
+TO APPLY: Send your resume and GitHub/Kaggle profile to data-jobs@example.com

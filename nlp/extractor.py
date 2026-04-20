@@ -1,16 +1,26 @@
 import io
 import pdfplumber
-from docx import Document # type: ignore
+from docx import Document
 import re
+import logging
 
 
 def extract_text(file_bytes: bytes, filename: str) -> str:
     ext = filename.lower().split(".")[-1]
-    if ext == "pdf":
-        return _extract_from_pdf(file_bytes)
-    if ext in ["docx", "doc"]:
-        return _extract_from_docx(file_bytes)
-    return _extract_from_txt(file_bytes)
+    text = ""
+    try:
+        if ext == "pdf":
+            text = _extract_from_pdf(file_bytes)
+        elif ext in ["docx", "doc"]:
+            text = _extract_from_docx(file_bytes)
+        else:
+            text = _extract_from_txt(file_bytes)
+        if not text.strip():
+            logging.warning(f"No text content could be extracted from {filename}")
+        return text
+    except Exception as e:
+        logging.error(f"Extraction failed for {filename}: {str(e)}")
+        return ""
 
 
 def _extract_from_pdf(file_bytes: bytes) -> str:
@@ -43,6 +53,8 @@ def _extract_from_txt(file_bytes: bytes) -> str:
 
 
 def extract_entities(text: str) -> dict:
+    if not text:
+        return {"email": "Not Found", "phone": "Not Found"}
     email = re.search(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", text)
     phone = re.search(r"(\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}", text)
     return {

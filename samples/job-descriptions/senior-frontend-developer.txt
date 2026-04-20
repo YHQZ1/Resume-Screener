@@ -1,0 +1,42 @@
+JOB TITLE: Senior Frontend Developer
+LOCATION: Bangalore, India (Remote/Hybrid)
+EMPLOYMENT TYPE: Full-time
+
+ABOUT THE COMPANY:
+We are a fast-growing B2B SaaS platform helping businesses automate their customer engagement. Our platform serves 500+ enterprise clients across 20 countries. We are looking for a frontend expert to lead our web application development.
+
+RESPONSIBILITIES:
+- Build and maintain responsive, high-performance web applications using React and Next.js
+- Collaborate with product managers and designers to translate Figma designs into pixel-perfect, accessible components
+- Optimize application for maximum speed, scalability, and SEO (Core Web Vitals)
+- Mentor junior developers and conduct code reviews
+- Implement state management solutions (Redux Toolkit, Zustand, or similar)
+- Write unit and integration tests using Jest and React Testing Library
+- Participate in sprint planning, daily standups, and retrospectives
+
+REQUIRED SKILLS (Must-have):
+- 3+ years of experience with React.js and TypeScript
+- Strong understanding of Next.js (SSR, SSG, ISR)
+- Proficiency with Tailwind CSS or Material UI
+- Experience with state management (Redux, Zustand, or Context API)
+- Knowledge of responsive design and cross-browser compatibility
+- Familiarity with Git and CI/CD workflows
+- Experience with testing (Jest, React Testing Library, or Cypress)
+
+NICE-TO-HAVE SKILLS:
+- Experience with WebSocket or real-time features
+- Knowledge of GraphQL (Apollo Client)
+- Open source contributions
+- Experience with Storybook or design systems
+
+EDUCATION & EXPERIENCE:
+- Bachelor's degree in Computer Science or related field (or equivalent experience)
+- 3-6 years of frontend development experience
+
+WHAT WE OFFER:
+- Competitive salary (₹15-25 LPA)
+- Health insurance & wellness benefits
+- Learning budget for courses/conferences
+- Flexible work hours
+
+TO APPLY: Send your resume to careers@example.com

@@ -1,178 +1,460 @@
 {
   "Languages": [
-    { "name": "python", "weight": 3 },
-    { "name": "java", "weight": 3 },
-    { "name": "javascript", "weight": 2 },
-    { "name": "typescript", "weight": 3 },
-    { "name": "go", "weight": 4 },
-    { "name": "rust", "weight": 5 },
-    { "name": "c++", "weight": 4 },
-    { "name": "c", "weight": 4 },
-    { "name": "c#", "weight": 3 },
-    { "name": "ruby", "weight": 3 },
-    { "name": "php", "weight": 2 },
-    { "name": "swift", "weight": 4 },
-    { "name": "kotlin", "weight": 4 },
-    { "name": "scala", "weight": 5 },
-    { "name": "r", "weight": 4 },
-    { "name": "dart", "weight": 3 },
-    { "name": "solidity", "weight": 5 },
-    { "name": "bash", "weight": 3 },
-    { "name": "powershell", "weight": 3 },
-    { "name": "cobol", "weight": 5 }
+    { "name": "python", "aliases": ["python3", "py"], "weight": 4 },
+    { "name": "java", "aliases": ["java8", "java11", "java17"], "weight": 4 },
+    { "name": "javascript", "aliases": ["js", "es6", "es2015"], "weight": 3 },
+    { "name": "typescript", "aliases": ["ts"], "weight": 3 },
+    { "name": "go", "aliases": ["golang"], "weight": 4 },
+    { "name": "rust", "aliases": [], "weight": 3 },
+    { "name": "c++", "aliases": ["cpp", "c plus plus"], "weight": 4 },
+    { "name": "c", "aliases": [], "weight": 3 },
+    { "name": "c#", "aliases": ["csharp", "dotnet", ".net"], "weight": 3 },
+    { "name": "ruby", "aliases": ["rb"], "weight": 2 },
+    { "name": "php", "aliases": [], "weight": 2 },
+    { "name": "swift", "aliases": [], "weight": 3 },
+    { "name": "kotlin", "aliases": [], "weight": 3 },
+    { "name": "scala", "aliases": [], "weight": 2 },
+    { "name": "r", "aliases": ["r language", "rlang"], "weight": 2 },
+    { "name": "dart", "aliases": [], "weight": 2 },
+    { "name": "solidity", "aliases": [], "weight": 2 },
+    {
+      "name": "bash",
+      "aliases": ["shell", "sh", "zsh", "shell scripting"],
+      "weight": 3
+    },
+    { "name": "powershell", "aliases": ["pwsh"], "weight": 2 },
+    { "name": "cobol", "aliases": [], "weight": 1 },
+    { "name": "matlab", "aliases": [], "weight": 2 },
+    { "name": "perl", "aliases": [], "weight": 1 }
   ],
   "Backend_and_APIs": [
-    { "name": "nodejs", "weight": 3 },
-    { "name": "express", "weight": 2 },
-    { "name": "nestjs", "weight": 4 },
-    { "name": "fastapi", "weight": 3 },
-    { "name": "flask", "weight": 2 },
-    { "name": "django", "weight": 3 },
-    { "name": "spring boot", "weight": 4 },
-    { "name": "gin", "weight": 4 },
-    { "name": "fiber", "weight": 4 },
-    { "name": "rest", "weight": 2 },
-    { "name": "graphql", "weight": 4 },
-    { "name": "grpc", "weight": 5 },
-    { "name": "trpc", "weight": 4 },
-    { "name": "webhooks", "weight": 3 },
-    { "name": "websockets", "weight": 4 },
-    { "name": "soap", "weight": 3 },
-    { "name": "apigee", "weight": 4 },
-    { "name": "kong", "weight": 5 },
-    { "name": "postman", "weight": 1 },
-    { "name": "swagger", "weight": 2 }
+    {
+      "name": "nodejs",
+      "aliases": ["node.js", "node js", "node"],
+      "weight": 3
+    },
+    { "name": "express", "aliases": ["expressjs", "express.js"], "weight": 2 },
+    { "name": "nestjs", "aliases": ["nest.js", "nest"], "weight": 3 },
+    { "name": "fastapi", "aliases": ["fast api"], "weight": 3 },
+    { "name": "flask", "aliases": [], "weight": 2 },
+    {
+      "name": "django",
+      "aliases": ["django rest framework", "drf"],
+      "weight": 3
+    },
+    { "name": "spring boot", "aliases": ["spring", "springboot"], "weight": 4 },
+    { "name": "gin", "aliases": ["gin framework"], "weight": 3 },
+    { "name": "fiber", "aliases": ["gofiber"], "weight": 3 },
+    { "name": "fastify", "aliases": [], "weight": 3 },
+    {
+      "name": "rest",
+      "aliases": ["rest api", "restful", "restful api"],
+      "weight": 3
+    },
+    { "name": "graphql", "aliases": ["graph ql"], "weight": 4 },
+    {
+      "name": "grpc",
+      "aliases": ["grpc api", "protocol buffers", "protobuf"],
+      "weight": 4
+    },
+    { "name": "trpc", "aliases": [], "weight": 3 },
+    { "name": "webhooks", "aliases": ["webhook"], "weight": 2 },
+    {
+      "name": "websockets",
+      "aliases": ["websocket", "ws", "socket.io"],
+      "weight": 3
+    },
+    { "name": "soap", "aliases": ["soap api"], "weight": 2 },
+    { "name": "apigee", "aliases": [], "weight": 3 },
+    { "name": "kong", "aliases": ["kong gateway"], "weight": 3 },
+    { "name": "postman", "aliases": [], "weight": 1 },
+    { "name": "swagger", "aliases": ["openapi", "open api"], "weight": 2 }
   ],
   "Distributed_Systems_and_Messaging": [
-    { "name": "kafka", "weight": 5 },
-    { "name": "rabbitmq", "weight": 4 },
-    { "name": "redis", "weight": 4 },
-    { "name": "bullmq", "weight": 4 },
-    { "name": "sqs", "weight": 4 },
-    { "name": "pub/sub", "weight": 4 },
-    { "name": "microservices", "weight": 4 },
-    { "name": "serverless", "weight": 4 },
-    { "name": "event-driven architecture", "weight": 5 },
-    { "name": "zookeeper", "weight": 5 },
-    { "name": "etcd", "weight": 5 },
-    { "name": "load balancing", "weight": 4 },
-    { "name": "service mesh", "weight": 5 },
-    { "name": "istio", "weight": 5 },
-    { "name": "distributed tracing", "weight": 4 }
+    { "name": "kafka", "aliases": ["apache kafka"], "weight": 5 },
+    { "name": "rabbitmq", "aliases": ["rabbit mq"], "weight": 4 },
+    { "name": "redis", "aliases": ["redis cache"], "weight": 4 },
+    { "name": "bullmq", "aliases": ["bull", "bull queue"], "weight": 3 },
+    {
+      "name": "sqs",
+      "aliases": ["aws sqs", "amazon sqs", "simple queue service"],
+      "weight": 4
+    },
+    {
+      "name": "pub/sub",
+      "aliases": ["pubsub", "pub sub", "google pubsub"],
+      "weight": 3
+    },
+    {
+      "name": "microservices",
+      "aliases": ["microservice", "micro services", "micro-services"],
+      "weight": 5
+    },
+    {
+      "name": "serverless",
+      "aliases": ["serverless architecture", "faas", "function as a service"],
+      "weight": 3
+    },
+    {
+      "name": "event-driven architecture",
+      "aliases": ["event driven", "eda", "event-driven"],
+      "weight": 4
+    },
+    { "name": "zookeeper", "aliases": ["apache zookeeper"], "weight": 3 },
+    { "name": "etcd", "aliases": [], "weight": 3 },
+    { "name": "load balancing", "aliases": ["load balancer"], "weight": 4 },
+    { "name": "service mesh", "aliases": [], "weight": 4 },
+    { "name": "istio", "aliases": [], "weight": 3 },
+    { "name": "distributed tracing", "aliases": ["tracing"], "weight": 4 },
+    {
+      "name": "fault tolerance",
+      "aliases": ["fault tolerant", "resilience", "resiliency"],
+      "weight": 4
+    },
+    {
+      "name": "distributed systems",
+      "aliases": ["distributed computing"],
+      "weight": 5
+    },
+    {
+      "name": "message queue",
+      "aliases": ["mq", "message broker"],
+      "weight": 4
+    }
   ],
   "Databases_and_Storage": [
-    { "name": "postgresql", "weight": 4 },
-    { "name": "mysql", "weight": 3 },
-    { "name": "mongodb", "weight": 3 },
-    { "name": "cassandra", "weight": 5 },
-    { "name": "dynamodb", "weight": 4 },
-    { "name": "elasticsearch", "weight": 5 },
-    { "name": "neo4j", "weight": 5 },
-    { "name": "clickhouse", "weight": 5 },
-    { "name": "scylladb", "weight": 5 },
-    { "name": "mariadb", "weight": 3 },
-    { "name": "sqlite", "weight": 2 },
-    { "name": "firebase", "weight": 2 },
-    { "name": "supabase", "weight": 3 },
-    { "name": "prisma", "weight": 3 },
-    { "name": "drizzle", "weight": 4 },
-    { "name": "hibernate", "weight": 3 },
-    { "name": "oracle", "weight": 4 },
-    { "name": "db2", "weight": 4 }
+    { "name": "postgresql", "aliases": ["postgres", "pg"], "weight": 4 },
+    { "name": "mysql", "aliases": [], "weight": 3 },
+    { "name": "mongodb", "aliases": ["mongo"], "weight": 3 },
+    { "name": "cassandra", "aliases": ["apache cassandra"], "weight": 4 },
+    { "name": "dynamodb", "aliases": ["dynamo", "aws dynamodb"], "weight": 4 },
+    {
+      "name": "elasticsearch",
+      "aliases": ["elastic search", "opensearch"],
+      "weight": 4
+    },
+    { "name": "neo4j", "aliases": ["graph database"], "weight": 3 },
+    { "name": "clickhouse", "aliases": ["click house"], "weight": 4 },
+    { "name": "scylladb", "aliases": ["scylla"], "weight": 3 },
+    { "name": "mariadb", "aliases": [], "weight": 2 },
+    { "name": "sqlite", "aliases": ["sqlite3"], "weight": 2 },
+    {
+      "name": "firebase",
+      "aliases": ["firestore", "firebase realtime database"],
+      "weight": 2
+    },
+    { "name": "supabase", "aliases": [], "weight": 2 },
+    { "name": "prisma", "aliases": ["prisma orm"], "weight": 2 },
+    { "name": "drizzle", "aliases": ["drizzle orm"], "weight": 3 },
+    { "name": "hibernate", "aliases": ["jpa"], "weight": 3 },
+    {
+      "name": "oracle",
+      "aliases": ["oracle db", "oracle database"],
+      "weight": 3
+    },
+    { "name": "db2", "aliases": ["ibm db2"], "weight": 3 },
+    { "name": "sql", "aliases": ["structured query language"], "weight": 4 },
+    { "name": "nosql", "aliases": ["no sql"], "weight": 3 },
+    {
+      "name": "vector databases",
+      "aliases": ["vector db", "pinecone", "weaviate", "qdrant", "chroma"],
+      "weight": 4
+    }
   ],
   "Cloud_and_Infrastructure": [
-    { "name": "aws", "weight": 4 },
-    { "name": "azure", "weight": 4 },
-    { "name": "gcp", "weight": 4 },
-    { "name": "docker", "weight": 3 },
-    { "name": "kubernetes", "weight": 5 },
-    { "name": "helm", "weight": 4 },
-    { "name": "terraform", "weight": 5 },
-    { "name": "ansible", "weight": 4 },
-    { "name": "pulumi", "weight": 5 },
-    { "name": "cloudformation", "weight": 4 },
-    { "name": "ec2", "weight": 3 },
-    { "name": "s3", "weight": 2 },
-    { "name": "lambda", "weight": 4 },
-    { "name": "fargate", "weight": 4 },
-    { "name": "nginx", "weight": 3 },
-    { "name": "cloudflare", "weight": 3 },
-    { "name": "digitalocean", "weight": 3 },
-    { "name": "linux", "weight": 3 }
+    {
+      "name": "aws",
+      "aliases": ["amazon web services", "amazon aws"],
+      "weight": 5
+    },
+    {
+      "name": "azure",
+      "aliases": ["microsoft azure", "azure cloud"],
+      "weight": 4
+    },
+    {
+      "name": "gcp",
+      "aliases": ["google cloud", "google cloud platform"],
+      "weight": 4
+    },
+    {
+      "name": "docker",
+      "aliases": ["dockerfile", "docker compose", "docker-compose"],
+      "weight": 4
+    },
+    { "name": "kubernetes", "aliases": ["k8s", "kube"], "weight": 5 },
+    { "name": "helm", "aliases": ["helm charts"], "weight": 4 },
+    {
+      "name": "terraform",
+      "aliases": ["tf", "hashicorp terraform"],
+      "weight": 4
+    },
+    { "name": "ansible", "aliases": [], "weight": 3 },
+    { "name": "pulumi", "aliases": [], "weight": 3 },
+    {
+      "name": "cloudformation",
+      "aliases": ["aws cloudformation", "cfn"],
+      "weight": 3
+    },
+    { "name": "ec2", "aliases": ["aws ec2", "elastic compute"], "weight": 3 },
+    {
+      "name": "s3",
+      "aliases": ["aws s3", "simple storage service"],
+      "weight": 3
+    },
+    { "name": "lambda", "aliases": ["aws lambda"], "weight": 4 },
+    {
+      "name": "fargate",
+      "aliases": ["aws fargate", "ecs fargate"],
+      "weight": 4
+    },
+    {
+      "name": "ecs",
+      "aliases": ["aws ecs", "elastic container service"],
+      "weight": 4
+    },
+    {
+      "name": "ecr",
+      "aliases": ["aws ecr", "elastic container registry"],
+      "weight": 3
+    },
+    { "name": "nginx", "aliases": ["nginx server"], "weight": 3 },
+    { "name": "cloudflare", "aliases": [], "weight": 3 },
+    { "name": "digitalocean", "aliases": ["do", "digital ocean"], "weight": 2 },
+    {
+      "name": "linux",
+      "aliases": ["ubuntu", "debian", "centos", "unix"],
+      "weight": 4
+    },
+    {
+      "name": "alb",
+      "aliases": ["application load balancer", "aws alb"],
+      "weight": 3
+    }
   ],
   "DevOps_and_Observability": [
-    { "name": "jenkins", "weight": 3 },
-    { "name": "github actions", "weight": 3 },
-    { "name": "gitlab ci", "weight": 3 },
-    { "name": "argocd", "weight": 5 },
-    { "name": "prometheus", "weight": 4 },
-    { "name": "grafana", "weight": 4 },
-    { "name": "datadog", "weight": 4 },
-    { "name": "opentelemetry", "weight": 5 },
-    { "name": "elk stack", "weight": 4 },
-    { "name": "kibana", "weight": 3 },
-    { "name": "sentry", "weight": 2 },
-    { "name": "sonarclube", "weight": 3 }
+    { "name": "jenkins", "aliases": [], "weight": 3 },
+    {
+      "name": "github actions",
+      "aliases": ["github action", "gh actions"],
+      "weight": 4
+    },
+    {
+      "name": "gitlab ci",
+      "aliases": ["gitlab ci/cd", "gitlab pipeline"],
+      "weight": 3
+    },
+    { "name": "argocd", "aliases": ["argo cd", "argo"], "weight": 4 },
+    { "name": "prometheus", "aliases": [], "weight": 4 },
+    { "name": "grafana", "aliases": [], "weight": 3 },
+    { "name": "datadog", "aliases": ["data dog"], "weight": 4 },
+    {
+      "name": "opentelemetry",
+      "aliases": ["otel", "open telemetry"],
+      "weight": 4
+    },
+    { "name": "elk stack", "aliases": ["elk", "elastic stack"], "weight": 3 },
+    { "name": "kibana", "aliases": [], "weight": 3 },
+    { "name": "sentry", "aliases": [], "weight": 2 },
+    { "name": "sonarqube", "aliases": ["sonar", "sonarcloud"], "weight": 3 },
+    {
+      "name": "ci/cd",
+      "aliases": [
+        "cicd",
+        "continuous integration",
+        "continuous deployment",
+        "continuous delivery"
+      ],
+      "weight": 4
+    },
+    { "name": "splunk", "aliases": [], "weight": 3 },
+    { "name": "newrelic", "aliases": ["new relic"], "weight": 3 }
   ],
   "Frontend": [
-    { "name": "react", "weight": 3 },
-    { "name": "nextjs", "weight": 4 },
-    { "name": "vue", "weight": 3 },
-    { "name": "angular", "weight": 3 },
-    { "name": "svelte", "weight": 4 },
-    { "name": "remix", "weight": 4 },
-    { "name": "redux", "weight": 3 },
-    { "name": "zustand", "weight": 3 },
-    { "name": "react query", "weight": 4 },
-    { "name": "tailwind", "weight": 1 },
-    { "name": "sass", "weight": 2 },
-    { "name": "html", "weight": 1 },
-    { "name": "css", "weight": 1 },
-    { "name": "three.js", "weight": 5 },
-    { "name": "webgl", "weight": 5 },
-    { "name": "playwright", "weight": 4 },
-    { "name": "jest", "weight": 3 },
-    { "name": "cypress", "weight": 3 }
+    { "name": "react", "aliases": ["reactjs", "react.js"], "weight": 3 },
+    { "name": "nextjs", "aliases": ["next.js", "next js"], "weight": 3 },
+    { "name": "vue", "aliases": ["vuejs", "vue.js", "vue 3"], "weight": 3 },
+    { "name": "angular", "aliases": ["angularjs"], "weight": 3 },
+    { "name": "svelte", "aliases": ["sveltekit"], "weight": 3 },
+    { "name": "remix", "aliases": ["remix.run"], "weight": 3 },
+    { "name": "redux", "aliases": ["redux toolkit", "rtk"], "weight": 3 },
+    { "name": "zustand", "aliases": [], "weight": 2 },
+    {
+      "name": "react query",
+      "aliases": ["tanstack query", "react-query"],
+      "weight": 3
+    },
+    {
+      "name": "tailwind",
+      "aliases": ["tailwindcss", "tailwind css"],
+      "weight": 2
+    },
+    { "name": "sass", "aliases": ["scss"], "weight": 1 },
+    { "name": "html", "aliases": ["html5"], "weight": 1 },
+    { "name": "css", "aliases": ["css3"], "weight": 1 },
+    { "name": "three.js", "aliases": ["threejs"], "weight": 3 },
+    { "name": "webgl", "aliases": [], "weight": 3 },
+    { "name": "playwright", "aliases": [], "weight": 3 },
+    { "name": "jest", "aliases": [], "weight": 3 },
+    { "name": "cypress", "aliases": [], "weight": 3 },
+    { "name": "vite", "aliases": [], "weight": 2 },
+    { "name": "webpack", "aliases": [], "weight": 2 }
   ],
   "AI_and_Data_Science": [
-    { "name": "machine learning", "weight": 4 },
-    { "name": "deep learning", "weight": 5 },
-    { "name": "nlp", "weight": 5 },
-    { "name": "computer vision", "weight": 5 },
-    { "name": "pytorch", "weight": 5 },
-    { "name": "tensorflow", "weight": 5 },
-    { "name": "scikit-learn", "weight": 4 },
-    { "name": "pandas", "weight": 3 },
-    { "name": "numpy", "weight": 2 },
-    { "name": "hugging face", "weight": 4 },
-    { "name": "llama", "weight": 5 },
-    { "name": "langchain", "weight": 5 },
-    { "name": "openai", "weight": 3 },
-    { "name": "stable diffusion", "weight": 5 },
-    { "name": "vector databases", "weight": 5 }
+    { "name": "machine learning", "aliases": ["ml"], "weight": 4 },
+    { "name": "deep learning", "aliases": ["dl"], "weight": 4 },
+    { "name": "nlp", "aliases": ["natural language processing"], "weight": 4 },
+    {
+      "name": "computer vision",
+      "aliases": ["cv", "image recognition"],
+      "weight": 4
+    },
+    { "name": "pytorch", "aliases": ["torch"], "weight": 4 },
+    { "name": "tensorflow", "aliases": ["tf", "keras"], "weight": 4 },
+    { "name": "scikit-learn", "aliases": ["sklearn"], "weight": 3 },
+    { "name": "pandas", "aliases": [], "weight": 3 },
+    { "name": "numpy", "aliases": [], "weight": 2 },
+    {
+      "name": "hugging face",
+      "aliases": ["huggingface", "transformers"],
+      "weight": 4
+    },
+    {
+      "name": "llama",
+      "aliases": ["llama2", "llama3", "meta llama"],
+      "weight": 3
+    },
+    { "name": "langchain", "aliases": ["lang chain"], "weight": 4 },
+    {
+      "name": "openai",
+      "aliases": ["chatgpt", "gpt", "gpt-4", "gpt4"],
+      "weight": 3
+    },
+    { "name": "stable diffusion", "aliases": ["sdxl"], "weight": 3 },
+    { "name": "mlflow", "aliases": [], "weight": 3 },
+    { "name": "airflow", "aliases": ["apache airflow"], "weight": 3 },
+    { "name": "spark", "aliases": ["apache spark", "pyspark"], "weight": 4 },
+    { "name": "hadoop", "aliases": ["apache hadoop"], "weight": 3 },
+    { "name": "dbt", "aliases": ["data build tool"], "weight": 3 },
+    { "name": "tableau", "aliases": [], "weight": 2 },
+    { "name": "power bi", "aliases": ["powerbi"], "weight": 2 }
   ],
   "Cybersecurity": [
-    { "name": "penetration testing", "weight": 5 },
-    { "name": "oauth", "weight": 4 },
-    { "name": "jwt", "weight": 2 },
-    { "name": "saml", "weight": 4 },
-    { "name": "encryption", "weight": 4 },
-    { "name": "owasp", "weight": 5 },
-    { "name": "siem", "weight": 5 },
-    { "name": "firewalls", "weight": 3 },
-    { "name": "ssl/tls", "weight": 3 }
+    {
+      "name": "penetration testing",
+      "aliases": ["pentesting", "pen testing", "ethical hacking"],
+      "weight": 4
+    },
+    { "name": "oauth", "aliases": ["oauth2", "oauth 2.0"], "weight": 3 },
+    { "name": "jwt", "aliases": ["json web token"], "weight": 2 },
+    { "name": "saml", "aliases": ["saml 2.0"], "weight": 3 },
+    {
+      "name": "encryption",
+      "aliases": ["aes", "rsa", "cryptography"],
+      "weight": 3
+    },
+    { "name": "owasp", "aliases": ["owasp top 10"], "weight": 4 },
+    { "name": "siem", "aliases": [], "weight": 4 },
+    { "name": "firewalls", "aliases": ["firewall"], "weight": 3 },
+    { "name": "ssl/tls", "aliases": ["ssl", "tls", "https"], "weight": 3 },
+    { "name": "zero trust", "aliases": ["zero-trust"], "weight": 3 },
+    { "name": "soc", "aliases": ["security operations center"], "weight": 3 }
   ],
   "Fundamentals_and_Soft_Skills": [
-    { "name": "system design", "weight": 5 },
-    { "name": "dsa", "weight": 4 },
-    { "name": "object-oriented programming", "weight": 3 },
-    { "name": "agile", "weight": 2 },
-    { "name": "scrum", "weight": 2 },
-    { "name": "leadership", "weight": 3 },
-    { "name": "problem solving", "weight": 2 },
-    { "name": "communication", "weight": 1 },
-    { "name": "unit testing", "weight": 3 },
-    { "name": "sdlc", "weight": 3 },
-    { "name": "git", "weight": 1 }
+    {
+      "name": "system design",
+      "aliases": [
+        "systems design",
+        "hld",
+        "lld",
+        "high level design",
+        "low level design"
+      ],
+      "weight": 5
+    },
+    {
+      "name": "dsa",
+      "aliases": [
+        "data structures and algorithms",
+        "data structures",
+        "algorithms"
+      ],
+      "weight": 4
+    },
+    {
+      "name": "object-oriented programming",
+      "aliases": ["oop", "oops", "object oriented"],
+      "weight": 3
+    },
+    { "name": "agile", "aliases": ["agile methodology"], "weight": 3 },
+    { "name": "scrum", "aliases": [], "weight": 2 },
+    { "name": "leadership", "aliases": [], "weight": 3 },
+    { "name": "problem solving", "aliases": [], "weight": 3 },
+    { "name": "communication", "aliases": [], "weight": 2 },
+    { "name": "unit testing", "aliases": ["unit tests"], "weight": 3 },
+    {
+      "name": "integration testing",
+      "aliases": ["integration tests", "e2e testing", "end to end testing"],
+      "weight": 3
+    },
+    {
+      "name": "code review",
+      "aliases": ["code reviews", "pr review"],
+      "weight": 3
+    },
+    {
+      "name": "sdlc",
+      "aliases": [
+        "software development lifecycle",
+        "software development life cycle"
+      ],
+      "weight": 3
+    },
+    {
+      "name": "git",
+      "aliases": ["github", "gitlab", "version control"],
+      "weight": 2
+    },
+    { "name": "ci/cd", "aliases": ["cicd"], "weight": 4 },
+    {
+      "name": "performance tuning",
+      "aliases": [
+        "performance optimization",
+        "query optimization",
+        "profiling"
+      ],
+      "weight": 4
+    },
+    { "name": "debugging", "aliases": ["troubleshooting"], "weight": 3 },
+    {
+      "name": "technical design",
+      "aliases": ["technical design document", "tdd", "design document"],
+      "weight": 4
+    },
+    {
+      "name": "on-call",
+      "aliases": ["oncall", "incident response", "runbooks"],
+      "weight": 3
+    },
+    { "name": "mentoring", "aliases": ["mentorship", "coaching"], "weight": 3 },
+    {
+      "name": "cross-functional",
+      "aliases": ["cross functional", "stakeholder management"],
+      "weight": 2
+    }
+  ],
+  "Mobile": [
+    { "name": "react native", "aliases": ["react-native"], "weight": 3 },
+    { "name": "flutter", "aliases": [], "weight": 3 },
+    { "name": "ios", "aliases": ["ios development"], "weight": 3 },
+    { "name": "android", "aliases": ["android development"], "weight": 3 },
+    { "name": "expo", "aliases": [], "weight": 2 }
+  ],
+  "Blockchain": [
+    { "name": "ethereum", "aliases": ["eth"], "weight": 3 },
+    { "name": "web3", "aliases": ["web 3"], "weight": 3 },
+    { "name": "smart contracts", "aliases": ["smart contract"], "weight": 3 },
+    { "name": "hardhat", "aliases": [], "weight": 2 },
+    { "name": "foundry", "aliases": [], "weight": 2 }
   ]
 }

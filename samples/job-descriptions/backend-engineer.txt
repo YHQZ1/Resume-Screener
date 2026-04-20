@@ -1,0 +1,43 @@
+JOB TITLE: Backend Engineer - Distributed Systems
+LOCATION: Hyderabad, India (On-site)
+EMPLOYMENT TYPE: Full-time
+
+ABOUT THE COMPANY:
+We are a fintech startup building a next-gen payment processing platform. We handle millions of transactions daily and need engineers who can build reliable, scalable, and secure systems.
+
+RESPONSIBILITIES:
+- Design, develop, and maintain high-throughput microservices in Go and Python
+- Build RESTful and gRPC APIs for internal and external consumers
+- Implement message-driven architectures using Kafka or RabbitMQ
+- Optimize database queries and schema designs for PostgreSQL and Redis
+- Ensure idempotency, data consistency, and fault tolerance in distributed transactions
+- Write unit, integration, and contract tests
+- Participate in on-call rotation for production systems
+
+REQUIRED SKILLS (Must-have):
+- 4+ years of backend development experience
+- Strong proficiency in Go or Python (Go preferred)
+- Experience with PostgreSQL (indexing, query optimization, transactions)
+- Working knowledge of Redis (caching, rate limiting, distributed locks)
+- Understanding of message queues (Kafka, RabbitMQ, or SQS)
+- Familiarity with Docker and Kubernetes
+- Knowledge of distributed systems patterns (circuit breakers, retries, idempotency)
+
+NICE-TO-HAVE SKILLS:
+- Experience with financial systems or payment gateways
+- Knowledge of event sourcing or CQRS
+- Experience with gRPC and protocol buffers
+- AWS certifications (ECS, EKS, RDS)
+- Contributions to open-source backend projects
+
+EDUCATION & EXPERIENCE:
+- Bachelor's/Master's in Computer Science or related field
+- 4-8 years of backend engineering experience
+
+WHAT WE OFFER:
+- Competitive salary (₹20-35 LPA)
+- Equity options
+- Annual learning stipend (₹50k)
+- International conference travel
+
+TO APPLY: Send your resume to engineering-jobs@example.com

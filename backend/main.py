@@ -1,27 +1,39 @@
 import os
+import sys
+import logging
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from contextlib import asynccontextmanager
-from backend.routes.analyze import router
-from nlp.scorer import sbert_model
 
 load_dotenv()
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from backend.routes.analyze import router
+from backend.routes.coach import router as coach_router
+from nlp.scorer import sbert_model
+
+logging.basicConfig(level=logging.INFO)
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Pre-warm SBERT model to ensure immediate availability for first request
-    _ = sbert_model
+    try:
+        _ = sbert_model
+        logging.info("SBERT model loaded successfully.")
+    except Exception as e:
+        logging.error(f"Failed to load SBERT model on startup: {e}")
     yield
 
+
 app = FastAPI(
-    title="FlowATS Engine",
-    version="2.1.0",
+    title="Resume Screener",
+    version="1.0",
     lifespan=lifespan,
 )
 
-# Robust CORS configuration for production deployment
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[os.getenv("FRONTEND_URL", "http://localhost:5173")],
@@ -31,7 +43,7 @@ app.add_middleware(
 )
 
 app.include_router(router)
+app.include_router(coach_router)
 
 if __name__ == "__main__":
-    # Standard entry point for Uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("backend.main:app", host="0.0.0.0", port=8000, reload=True)
