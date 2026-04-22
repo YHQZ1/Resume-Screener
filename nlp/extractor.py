@@ -15,11 +15,16 @@ def extract_text(file_bytes: bytes, filename: str) -> str:
             text = _extract_from_docx(file_bytes)
         else:
             text = _extract_from_txt(file_bytes)
+        
+        # ADD THIS BLOCK
+        success = bool(text.strip())
+        logging.info(f"[METRIC] Extraction {'SUCCESS' if success else 'FAILED'} for {filename} ({ext})")
+        
         if not text.strip():
             logging.warning(f"No text content could be extracted from {filename}")
         return text
     except Exception as e:
-        logging.error(f"Extraction failed for {filename}: {str(e)}")
+        logging.error(f"[METRIC] Extraction FAILED for {filename}: {str(e)}")
         return ""
 
 

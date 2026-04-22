@@ -1,5 +1,6 @@
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from typing import Optional, List
+import time
 import logging
 from nlp.extractor import extract_text, extract_entities
 from nlp.preprocessor import preprocess
@@ -17,6 +18,8 @@ async def analyze(
     job_description_text: Optional[str] = Form(None),
     job_description_file: Optional[UploadFile] = File(None),
 ):
+    start = time.time()
+    
     jd_raw = ""
 
     if job_description_file and job_description_file.filename:
@@ -89,4 +92,8 @@ async def analyze(
         )
 
     results.sort(key=lambda x: x.hybrid_score, reverse=True)
+    
+    elapsed = time.time() - start
+    logging.info(f"[METRIC] /analyze response time: {elapsed:.3f}s")    
+    
     return results
