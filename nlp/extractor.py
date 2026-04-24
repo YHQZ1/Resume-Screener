@@ -1,39 +1,40 @@
 import io
-import pdfplumber
-from docx import Document
 import re
-import logging
+import pdfplumber # type: ignore
+from docx import Document # type: ignore
+import pytesseract # type: ignore
+from pdf2image import convert_from_bytes # type: ignore
 
 
 def extract_text(file_bytes: bytes, filename: str) -> str:
     ext = filename.lower().split(".")[-1]
-    text = ""
     try:
         if ext == "pdf":
-            text = _extract_from_pdf(file_bytes)
+            return _extract_from_pdf(file_bytes)
         elif ext in ["docx", "doc"]:
-            text = _extract_from_docx(file_bytes)
+            return _extract_from_docx(file_bytes)
         else:
-            text = _extract_from_txt(file_bytes)
-        
-        # ADD THIS BLOCK
-        success = bool(text.strip())
-        logging.info(f"[METRIC] Extraction {'SUCCESS' if success else 'FAILED'} for {filename} ({ext})")
-        
-        if not text.strip():
-            logging.warning(f"No text content could be extracted from {filename}")
-        return text
-    except Exception as e:
-        logging.error(f"[METRIC] Extraction FAILED for {filename}: {str(e)}")
+            return _extract_from_txt(file_bytes)
+    except Exception:
         return ""
 
 
 def _extract_from_pdf(file_bytes: bytes) -> str:
     try:
         with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
-            return "\n".join(
-                [p.extract_text(layout=True) or "" for p in pdf.pages]
-            ).strip()
+            pages = [p.extract_text(layout=True) or "" for p in pdf.pages]
+            text = "\n".join(pages).strip()
+            if not text:
+                text = _ocr_fallback(file_bytes)
+            return text
+    except Exception:
+        return ""
+
+
+def _ocr_fallback(file_bytes: bytes) -> str:
+    try:
+        images = convert_from_bytes(file_bytes)
+        return "\n".join(pytesseract.image_to_string(img) for img in images).strip()
     except Exception:
         return ""
 

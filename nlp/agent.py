@@ -1,14 +1,13 @@
 import json
 import os
-import logging
-from openai import OpenAI
+from openai import OpenAI  # type: ignore
 from nlp.skill_analyzer import SKILL_MAP, _extract_weighted_skills
-from nlp.scorer import TFIDF_WEIGHT, SBERT_WEIGHT, SKILL_WEIGHT
+from nlp.scorer import SKILL_WEIGHT
 
 _client = None
 
 
-def get_client():
+def get_client() -> OpenAI:
     global _client
     if _client is None:
         _client = OpenAI(
@@ -16,6 +15,39 @@ def get_client():
             api_key="ollama",
         )
     return _client
+
+
+def _extract_relevant_sections(text: str, max_chars: int = 2000) -> str:
+    if len(text) <= max_chars:
+        return text
+
+    priority_keywords = [
+        "experience",
+        "skills",
+        "projects",
+        "education",
+        "employment",
+        "work history",
+        "technologies",
+        "stack",
+    ]
+    lines = text.splitlines()
+    scored: list[tuple[int, str]] = []
+
+    for i, line in enumerate(lines):
+        line_lower = line.lower()
+        score = sum(1 for kw in priority_keywords if kw in line_lower)
+        scored.append((score, i, line))
+
+    scored.sort(key=lambda x: x[0], reverse=True)
+    selected_indices = sorted(x[1] for x in scored if x[0] > 0)
+
+    if not selected_indices:
+        return text[:max_chars]
+
+    result_lines = [lines[i] for i in selected_indices]
+    result = "\n".join(result_lines)
+    return result[:max_chars] if len(result) > max_chars else result
 
 
 def _run_simulation_loop(
@@ -46,10 +78,7 @@ def _run_simulation_loop(
         new_score = round(current_score + (SKILL_WEIGHT * coverage_delta), 4)
 
         improvement = new_score - current_score
-        if improvement < 0.02:
-            plateau_count += 1
-        else:
-            plateau_count = 0
+        plateau_count = plateau_count + 1 if improvement < 0.001 else 0
 
         skills_added.append(skill)
         score_progression.append(new_score)
@@ -59,7 +88,7 @@ def _run_simulation_loop(
         if current_score >= threshold:
             break
 
-        if plateau_count >= 2:
+        if plateau_count >= 5:
             plateau_detected = True
             break
 
@@ -85,8 +114,10 @@ def _get_llm_report(
 ) -> dict:
     matched = ", ".join(resume_result.get("matched_skills", [])) or "None"
     missing_priority = ", ".join(simulation["skills_added"][:5]) or "None"
-    resume_raw = resume_result.get("resume_raw", "")[:1500]
-    jd_raw = resume_result.get("jd_raw", "")[:1000]
+    resume_excerpt = _extract_relevant_sections(resume_result.get("resume_raw", ""))
+    jd_excerpt = _extract_relevant_sections(
+        resume_result.get("jd_raw", ""), max_chars=1000
+    )
 
     prompt = f"""You are a technical career coach. Write a coaching report based on this resume analysis.
 
@@ -100,29 +131,26 @@ Candidate Data:
 - Plateau Detected: {simulation['plateau_detected']}
 
 Resume excerpt:
-{resume_raw}
+{resume_excerpt}
 
 Job Description excerpt:
-{jd_raw}
+{jd_excerpt}
 
 Respond with ONLY a valid JSON object. No markdown, no explanation, no extra text before or after:
 {{"reasoning": "one paragraph verdict explanation referencing the candidate specifically", "action_items": ["specific action 1 referencing actual resume content", "specific action 2", "specific action 3"], "semantic_gap_reason": "specific explanation of what vocabulary or narrative is missing from this resume compared to this JD"}}"""
 
     try:
+        model_name = os.getenv("OLLAMA_MODEL", "qwen3:0.6b")
         response = get_client().chat.completions.create(
-            model="qwen3:0.6b",
+            model=model_name,
             messages=[{"role": "user", "content": prompt}],
             temperature=0.2,
         )
-        text = response.choices[0].message.content or "{}"
-        text = text.strip()
+        text = (response.choices[0].message.content or "{}").strip()
 
         if "```" in text:
-            parts = text.split("```")
-            for part in parts:
-                part = part.strip()
-                if part.startswith("json"):
-                    part = part[4:].strip()
+            for part in text.split("```"):
+                part = part.strip().lstrip("json").strip()
                 if part.startswith("{"):
                     text = part
                     break
@@ -144,10 +172,13 @@ Respond with ONLY a valid JSON object. No markdown, no explanation, no extra tex
 
         return parsed
 
-    except Exception as e:
-        logging.error(f"LLM report generation failed: {e}")
+    except Exception:
         return {
-            "reasoning": f"Candidate scored {round(simulation['final_score'] * 100, 1)}% against a {round(threshold * 100, 1)}% threshold. {'Score plateaued — the main barrier is semantic mismatch, not missing skills.' if simulation['plateau_detected'] else 'Adding the recommended skills would improve alignment with the job description.'}",
+            "reasoning": (
+                f"Candidate scored {round(simulation['final_score'] * 100, 1)}% against a "
+                f"{round(threshold * 100, 1)}% threshold. "
+                f"{'Score plateaued — the main barrier is semantic mismatch, not missing skills.' if simulation['plateau_detected'] else 'Adding the recommended skills would improve alignment with the job description.'}"
+            ),
             "action_items": (
                 [
                     f"Add {s} to your resume and describe your experience with it"
@@ -157,7 +188,10 @@ Respond with ONLY a valid JSON object. No markdown, no explanation, no extra tex
                     "Align your resume language more closely with the job description terminology."
                 ]
             ),
-            "semantic_gap_reason": "The resume narrative does not closely match the terminology and concepts used in the job description. Rewriting project descriptions using JD-aligned language would improve the semantic score.",
+            "semantic_gap_reason": (
+                "The resume narrative does not closely match the terminology and concepts used in the "
+                "job description. Rewriting project descriptions using JD-aligned language would improve the semantic score."
+            ),
         }
 
 

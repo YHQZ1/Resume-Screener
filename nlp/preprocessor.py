@@ -1,20 +1,28 @@
 import re
-import spacy
-import logging
+import sys
+import spacy  # type: ignore
 
-try:
-    nlp = spacy.load("en_core_web_sm", disable=["ner", "parser"])
-except OSError:
-    logging.error("spaCy model 'en_core_web_sm' not found.")
-    raise OSError("spaCy model missing. Run: python -m spacy download en_core_web_sm")
+
+def _load_spacy_model():
+    try:
+        return spacy.load("en_core_web_sm", disable=["ner", "parser"])
+    except OSError:
+        print(
+            "ERROR: spaCy model 'en_core_web_sm' not found. "
+            "Run: python -m spacy download en_core_web_sm",
+            file=sys.stderr,
+        )
+        raise
+
+
+nlp = _load_spacy_model()
 
 
 def preprocess(text: str) -> str:
     if not text or not text.strip():
         return ""
     text = _clean(text)
-    text = _tokenize_and_lemmatize(text)
-    return text
+    return _tokenize_and_lemmatize(text)
 
 
 def _clean(text: str) -> str:

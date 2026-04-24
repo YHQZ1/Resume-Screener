@@ -1,17 +1,27 @@
-from sentence_transformers import SentenceTransformer, util
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-import torch
-import logging
+import torch  # type: ignore
+from sentence_transformers import SentenceTransformer, util  # type: ignore
+from sklearn.feature_extraction.text import TfidfVectorizer  # type: ignore
+from sklearn.metrics.pairwise import cosine_similarity  # type: ignore
 
 TFIDF_WEIGHT = 0.2
 SBERT_WEIGHT = 0.5
 SKILL_WEIGHT = 0.3
 
-try:
-    sbert_model = SentenceTransformer("all-MiniLM-L6-v2")
-except Exception as e:
-    raise RuntimeError(f"Failed to load SBERT model: {e}")
+_sbert_model = None
+
+
+def get_sbert_model() -> SentenceTransformer:
+    global _sbert_model
+    if _sbert_model is None:
+        try:
+            _sbert_model = SentenceTransformer("all-MiniLM-L6-v2")
+        except Exception as e:
+            raise RuntimeError(
+                f"Failed to load SBERT model 'all-MiniLM-L6-v2'. "
+                f"Ensure sentence-transformers is installed and the model is cached. Error: {e}"
+            )
+    return _sbert_model
+
 
 def score(
     resume_clean: str,
@@ -37,29 +47,26 @@ def compute_tfidf_score(resume_clean: str, jd_clean: str) -> float:
     vectorizer = TfidfVectorizer(ngram_range=(1, 2))
     try:
         tfidf_matrix = vectorizer.fit_transform([resume_clean, jd_clean])
-        result = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])[0][0]
-        return float(result)
-    except Exception as e:
-        logging.error(f"TF-IDF scoring failed: {e}")
+        return float(cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])[0][0])
+    except Exception:
         return 0.0
 
 
 def compute_sbert_score(resume_raw: str, jd_raw: str, jd_embedding=None) -> float:
     try:
+        model = get_sbert_model()
         resume_chunks = [
             resume_raw[i : i + 500] for i in range(0, len(resume_raw), 500)
         ]
-        r_embeddings = sbert_model.encode(resume_chunks, convert_to_tensor=True)
+        r_embeddings = model.encode(resume_chunks, convert_to_tensor=True)
 
         if jd_embedding is None:
             jd_chunks = [jd_raw[i : i + 500] for i in range(0, len(jd_raw), 500)]
-            jd_embedding = sbert_model.encode(jd_chunks, convert_to_tensor=True)
+            jd_embedding = model.encode(jd_chunks, convert_to_tensor=True)
 
         cosine_scores = util.cos_sim(r_embeddings, jd_embedding)
-        result = torch.max(cosine_scores).item()
-        return float(max(0.0, min(1.0, result)))
-    except Exception as e:
-        logging.error(f"SBERT scoring failed: {e}")
+        return float(max(0.0, min(1.0, torch.max(cosine_scores).item())))
+    except Exception:
         return 0.0
 
 

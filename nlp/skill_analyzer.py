@@ -1,7 +1,6 @@
 import re
 import json
 import os
-import logging
 
 MIN_JD_SKILLS = 5
 
@@ -12,10 +11,8 @@ def load_skills() -> dict:
         if os.path.exists(file_path):
             with open(file_path, "r", encoding="utf-8") as f:
                 return json.load(f)
-        else:
-            logging.warning(f"skills.json not found at {file_path}. Using fallback.")
-    except Exception as e:
-        logging.error(f"Error loading skills.json: {e}")
+    except Exception:
+        pass
 
     return {
         "Backend": [
@@ -30,13 +27,13 @@ SKILLS_DB = load_skills()
 SKILL_MAP: dict[str, int] = {}
 ALIAS_MAP: dict[str, str] = {}
 
-for category in SKILLS_DB.values():
-    for skill in category:
-        canonical = skill["name"].lower()
-        weight = skill["weight"]
-        SKILL_MAP[canonical] = weight
-        for alias in skill.get("aliases", []):
-            ALIAS_MAP[alias.lower()] = canonical
+for _category in SKILLS_DB.values():
+    for _skill in _category:
+        _canonical = _skill["name"].lower()
+        _weight = _skill["weight"]
+        SKILL_MAP[_canonical] = _weight
+        for _alias in _skill.get("aliases", []):
+            ALIAS_MAP[_alias.lower()] = _canonical
 
 
 def _resolve(term: str) -> str:
@@ -53,9 +50,7 @@ def analyze_skills(resume_raw: str, jd_raw: str) -> dict:
     total_jd_weight = sum(jd_required.values())
     matched_weight = sum(jd_required[s] for s in matched)
 
-    jd_skill_count = len(jd_required)
-    effective_skill_weight = 0.15 if jd_skill_count < MIN_JD_SKILLS else 0.3
-
+    effective_skill_weight = 0.15 if len(jd_required) < MIN_JD_SKILLS else 0.3
     skill_coverage = (matched_weight / total_jd_weight) if total_jd_weight > 0 else 0.0
 
     return {
@@ -80,12 +75,8 @@ def _extract_weighted_skills(text: str) -> dict:
         canonical = _resolve(term)
         weight = SKILL_MAP.get(canonical, 0)
 
-        if len(term) <= 3:
-            if re.search(rf"\b{re.escape(term)}\b", text_low):
-                found[canonical] = weight
-        else:
-            if term in text_low:
-                found[canonical] = weight
+        if re.search(rf"\b{re.escape(term)}\b", text_low):
+            found[canonical] = weight
 
     return found
 
