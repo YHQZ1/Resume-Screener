@@ -1,24 +1,46 @@
-FROM python:3.12-slim
+FROM python:3.12-slim AS backend-base
 
 WORKDIR /app
 
-# Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    gcc \
+    g++ \
+    tesseract-ocr \
+    poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install
 COPY backend/requirements.txt ./backend/
-RUN pip install --no-cache-dir -r backend/requirements.txt
 
-# --- ADD THIS LINE ---
-# This downloads the missing model into the container image
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir \
+        --extra-index-url https://download.pytorch.org/whl/cpu \
+        -r backend/requirements.txt
+
 RUN python -m spacy download en_core_web_sm
 
-# Copy the rest of the code
 COPY backend/ ./backend/
 COPY nlp/ ./nlp/
 
 EXPOSE 8000
 
 CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+
+FROM node:20-slim AS frontend-build
+
+WORKDIR /app
+
+COPY frontend/package*.json ./
+RUN npm ci
+
+COPY frontend/ ./
+RUN npm run build
+
+
+FROM nginx:alpine AS frontend
+
+COPY --from=frontend-build /app/dist /usr/share/nginx/html
+COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
