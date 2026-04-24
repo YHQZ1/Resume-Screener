@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect, useRef } from "react";
 import type { AnalyzeResult, AgentResult } from "../api/client";
 import { coachResume } from "../api/client";
 import ScoreRing from "../components/Scorering";
@@ -9,12 +10,14 @@ type Props = {
   result: AnalyzeResult;
 };
 
+type AgentStatus = "idle" | "loading" | "success" | "error";
+
 export default function ResultPage({ result }: Props) {
   const [agentResult, setAgentResult] = useState<AgentResult | null>(null);
-  const [agentLoading, setAgentLoading] = useState(false);
+  const [agentStatus, setAgentStatus] = useState<AgentStatus>("idle");
   const [agentError, setAgentError] = useState("");
   const [threshold, setThreshold] = useState(0.75);
-  const [hasAutoRun, setHasAutoRun] = useState(false);
+  const hasAutoRun = useRef(false);
 
   const skillCoverage = result.skill_coverage;
   const pct = Math.round(result.hybrid_score * 100);
@@ -29,29 +32,27 @@ export default function ResultPage({ result }: Props) {
   const fitTier = pct >= 70 ? "strong" : pct >= 40 ? "moderate" : "low";
 
   const runAgent = async (t: number) => {
-    setAgentLoading(true);
+    setAgentStatus("loading");
     setAgentError("");
     setAgentResult(null);
     try {
       const data = await coachResume(result, t);
       setAgentResult(data);
+      setAgentStatus("success");
     } catch (err) {
       setAgentError(
         err instanceof Error ? err.message : "Agent evaluation failed.",
       );
-    } finally {
-      setAgentLoading(false);
+      setAgentStatus("error");
     }
   };
 
   useEffect(() => {
-    if (!hasAutoRun) {
-      setHasAutoRun(true);
+    if (!hasAutoRun.current) {
+      hasAutoRun.current = true;
       runAgent(threshold);
     }
   }, []);
-
-  const handleRunAgent = () => runAgent(threshold);
 
   const verdictConfig = {
     hireable: { label: "Hireable", bg: "#1a1a18", text: "#fff" },
@@ -259,27 +260,27 @@ export default function ResultPage({ result }: Props) {
               </select>
             </div>
             <button
-              onClick={handleRunAgent}
-              disabled={agentLoading}
+              onClick={() => runAgent(threshold)}
+              disabled={agentStatus === "loading"}
               className={`px-4 py-2 rounded-[6px] text-[13px] font-medium transition-all duration-150
                 ${
-                  agentLoading
+                  agentStatus === "loading"
                     ? "bg-[#eceae5] text-[#9a9990] cursor-not-allowed"
                     : "bg-[#1a1a18] text-white hover:bg-[#2e2e2a] cursor-pointer"
                 }`}
             >
-              {agentLoading ? "Agent running…" : "Re-run Agent →"}
+              {agentStatus === "loading" ? "Agent running…" : "Re-run Agent →"}
             </button>
           </div>
         </div>
 
-        {agentError && (
+        {agentStatus === "error" && (
           <div className="text-[13px] font-medium text-[#8b3a3a] bg-[#fdf2f2] border border-[#f0d4d4] rounded-[6px] px-4 py-3 mb-4">
             {agentError}
           </div>
         )}
 
-        {agentLoading && (
+        {agentStatus === "loading" && (
           <div className="flex flex-col gap-3 py-8 items-center">
             <div className="flex gap-1.5">
               {[0, 1, 2].map((i) => (
@@ -299,16 +300,14 @@ export default function ResultPage({ result }: Props) {
           </div>
         )}
 
-        {agentResult && !agentLoading && (
+        {agentStatus === "success" && agentResult && (
           <div className="flex flex-col gap-5">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div
                 className="rounded-[8px] px-5 py-4 flex flex-col gap-1"
                 style={{
                   background:
-                    verdictConfig[
-                      agentResult.verdict as keyof typeof verdictConfig
-                    ]?.bg ?? "#f6f5f2",
+                    verdictConfig[agentResult.verdict]?.bg ?? "#f6f5f2",
                   border: `1px solid ${agentResult.verdict === "hireable" ? "#1a1a18" : agentResult.verdict === "borderline" ? "#e8e7e2" : "#f0d4d4"}`,
                 }}
               >
@@ -325,16 +324,9 @@ export default function ResultPage({ result }: Props) {
                 </span>
                 <span
                   className="text-[20px] font-semibold tracking-[-0.02em]"
-                  style={{
-                    color:
-                      verdictConfig[
-                        agentResult.verdict as keyof typeof verdictConfig
-                      ]?.text ?? "#1a1a18",
-                  }}
+                  style={{ color: verdictConfig[agentResult.verdict]?.text ?? "#1a1a18" }}
                 >
-                  {verdictConfig[
-                    agentResult.verdict as keyof typeof verdictConfig
-                  ]?.label ?? agentResult.verdict}
+                  {verdictConfig[agentResult.verdict]?.label ?? agentResult.verdict}
                 </span>
               </div>
 
@@ -417,26 +409,25 @@ export default function ResultPage({ result }: Props) {
               </div>
             )}
 
-            {agentResult.action_items &&
-              agentResult.action_items.length > 0 && (
-                <div className="bg-white border border-[#e8e7e2] rounded-[8px] px-5 py-4">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.07em] text-[#9a9990] block mb-3">
-                    Action Items
-                  </span>
-                  <div className="flex flex-col gap-3">
-                    {agentResult.action_items.map((item, i) => (
-                      <div key={i} className="flex gap-3 items-start">
-                        <div className="w-[20px] h-[20px] rounded-full bg-[#1a1a18] text-white text-[10px] font-semibold flex items-center justify-center flex-shrink-0 mt-0.5">
-                          {i + 1}
-                        </div>
-                        <p className="text-[13px] text-[#1a1a18] leading-relaxed">
-                          {item}
-                        </p>
+            {agentResult.action_items.length > 0 && (
+              <div className="bg-white border border-[#e8e7e2] rounded-[8px] px-5 py-4">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.07em] text-[#9a9990] block mb-3">
+                  Action Items
+                </span>
+                <div className="flex flex-col gap-3">
+                  {agentResult.action_items.map((item, i) => (
+                    <div key={i} className="flex gap-3 items-start">
+                      <div className="w-[20px] h-[20px] rounded-full bg-[#1a1a18] text-white text-[10px] font-semibold flex items-center justify-center flex-shrink-0 mt-0.5">
+                        {i + 1}
                       </div>
-                    ))}
-                  </div>
+                      <p className="text-[13px] text-[#1a1a18] leading-relaxed">
+                        {item}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-              )}
+              </div>
+            )}
 
             {agentResult.semantic_gap_reason && (
               <div className="bg-[#f6f5f2] border border-[#e8e7e2] rounded-[8px] px-5 py-4">
@@ -460,7 +451,7 @@ export default function ResultPage({ result }: Props) {
           </div>
         )}
 
-        {!agentResult && !agentLoading && agentError === "" && (
+        {agentStatus === "idle" && (
           <div className="border border-dashed border-[#d4d3cd] rounded-[8px] px-6 py-10 text-center">
             <p className="text-[14px] text-[#9a9990]">
               Initializing agent evaluation…

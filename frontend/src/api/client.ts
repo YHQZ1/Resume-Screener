@@ -9,8 +9,8 @@ export type AnalyzeResult = {
   matched_skills: string[];
   missing_skills: string[];
   suggestions: string[];
-  jd_raw?: string;
-  resume_raw?: string;
+  jd_raw: string;
+  resume_raw: string;
 };
 
 export type AgentResult = {
