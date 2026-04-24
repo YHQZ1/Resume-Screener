@@ -1,10 +1,8 @@
-from fastapi import APIRouter, File, Form, HTTPException, UploadFile
+from fastapi import APIRouter, File, Form, HTTPException, UploadFile  # type: ignore
 from typing import Optional, List
-import time
-import logging
 from nlp.extractor import extract_text, extract_entities
 from nlp.preprocessor import preprocess
-from nlp.scorer import score, sbert_model
+from nlp.scorer import score, get_sbert_model
 from nlp.skill_analyzer import analyze_skills
 from backend.models.schemas import AnalyzeResponse
 
@@ -18,8 +16,6 @@ async def analyze(
     job_description_text: Optional[str] = Form(None),
     job_description_file: Optional[UploadFile] = File(None),
 ):
-    start = time.time()
-    
     jd_raw = ""
 
     if job_description_file and job_description_file.filename:
@@ -36,7 +32,7 @@ async def analyze(
         raise HTTPException(status_code=422, detail="Provide a Job Description.")
 
     jd_clean = preprocess(jd_raw)
-    jd_embedding = sbert_model.encode(jd_raw, convert_to_tensor=True)
+    jd_embedding = get_sbert_model().encode(jd_raw, convert_to_tensor=True)
 
     results = []
 
@@ -48,9 +44,6 @@ async def analyze(
 
             resume_raw = extract_text(resume_bytes, resume.filename)
             if not resume_raw.strip():
-                logging.warning(
-                    f"Empty content extracted from {resume.filename}, skipping."
-                )
                 continue
 
             resume_clean = preprocess(resume_raw)
@@ -82,8 +75,7 @@ async def analyze(
                     resume_raw=resume_raw,
                 )
             )
-        except Exception as e:
-            logging.error(f"Failed to process {resume.filename}: {e}")
+        except Exception:
             continue
 
     if not results:
@@ -92,8 +84,4 @@ async def analyze(
         )
 
     results.sort(key=lambda x: x.hybrid_score, reverse=True)
-    
-    elapsed = time.time() - start
-    logging.info(f"[METRIC] /analyze response time: {elapsed:.3f}s")    
-    
     return results
