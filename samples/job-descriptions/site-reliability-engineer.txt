@@ -1,0 +1,34 @@
+JOB TITLE: Site Reliability Engineer - Cloud Infrastructure
+LOCATION: Bangalore, India (Hybrid)
+EMPLOYMENT TYPE: Full-time
+
+ABOUT THE COMPANY:
+We are a SaaS company providing real-time analytics for e-commerce businesses. Our platform processes billions of events monthly.
+
+RESPONSIBILITIES:
+- Design and maintain Kubernetes clusters across multiple cloud regions
+- Build observability pipelines using Prometheus, Grafana, and OpenTelemetry
+- Implement auto-scaling strategies to handle 10x traffic spikes
+- Lead incident management and blameless post-mortems
+- Develop Terraform modules for infrastructure provisioning
+- Optimize CI/CD pipelines (GitHub Actions, ArgoCD)
+- Manage SLI/SLO definitions and error budgets
+
+REQUIRED SKILLS (Must-have):
+- 5+ years in DevOps/SRE roles
+- Kubernetes (EKS/GKE) production experience
+- Terraform or Pulumi
+- Prometheus + Grafana stack
+- Strong Linux systems knowledge
+- Python or Go scripting
+- Experience with AWS (EC2, RDS, VPC, IAM)
+
+NICE-TO-HAVE SKILLS:
+- Chaos engineering (Chaos Mesh, Gremlin)
+- Service mesh (Istio, Linkerd)
+- Security compliance (SOC2, ISO 27001)
+- ClickHouse or Druid experience
+
+EDUCATION & EXPERIENCE:
+- Bachelor's in CS/IT or equivalent experience
+- 5-9 years infrastructure experience

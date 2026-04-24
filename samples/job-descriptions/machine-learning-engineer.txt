@@ -1,0 +1,35 @@
+JOB TITLE: Machine Learning Engineer - MLOps
+LOCATION: Bangalore, India
+EMPLOYMENT TYPE: Full-time
+
+ABOUT THE COMPANY:
+Series C AI startup building LLM-powered customer support automation.
+
+RESPONSIBILITIES:
+- Deploy and serve ML models (PyTorch, TensorFlow) at scale
+- Build feature stores using Feast or Hopsworks
+- Implement model monitoring for drift detection
+- Create CI/CD pipelines for model training and deployment
+- Optimize inference latency using ONNX, TensorRT
+- Manage data pipelines with Airflow or Prefect
+- Version models using DVC or MLflow
+
+REQUIRED SKILLS (Must-have):
+- 3+ years MLOps or ML engineering
+- Python and ML frameworks (PyTorch/TensorFlow)
+- Docker and Kubernetes
+- AWS SageMaker or Vertex AI
+- MLflow for experiment tracking
+- Experience with LLMs (Hugging Face, LangChain)
+- SQL and data manipulation
+
+NICE-TO-HAVE SKILLS:
+- Ray or Spark for distributed training
+- Vector databases (Pinecone, Qdrant, Chroma)
+- FastAPI for model serving
+- Feast feature store
+- Triton Inference Server
+
+EDUCATION & EXPERIENCE:
+- Master's/PhD in CS/AI (or equivalent experience)
+- 3-8 years ML/AI experience

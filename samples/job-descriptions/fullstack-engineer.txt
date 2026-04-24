@@ -1,0 +1,34 @@
+JOB TITLE: Full Stack Engineer - Product Team
+LOCATION: Remote (India)
+EMPLOYMENT TYPE: Full-time
+
+ABOUT THE COMPANY:
+Early-stage B2B SaaS startup building workflow automation tools. Series A funded.
+
+RESPONSIBILITIES:
+- Build responsive React applications with TypeScript and Tailwind
+- Develop REST and GraphQL APIs using Node.js + Express
+- Design PostgreSQL schemas and optimize queries
+- Implement authentication (Auth0, JWT) and RBAC
+- Write unit and integration tests (Jest, React Testing Library, Supertest)
+- Deploy to AWS using Docker and ECS
+
+REQUIRED SKILLS (Must-have):
+- 3+ years of full-stack experience
+- React (hooks, context, custom hooks)
+- Node.js and Express
+- TypeScript proficiency
+- PostgreSQL or MySQL
+- Git and GitHub Actions
+- REST API design principles
+
+NICE-TO-HAVE SKILLS:
+- Next.js (App Router)
+- GraphQL (Apollo Client/Server)
+- Redis caching
+- Tailwind CSS
+- Playwright or Cypress
+
+EDUCATION & EXPERIENCE:
+- Bachelor's in CS or related
+- 3-7 years full-stack development

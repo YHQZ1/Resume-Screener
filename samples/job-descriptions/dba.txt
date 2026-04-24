@@ -1,0 +1,34 @@
+JOB TITLE: Senior Database Administrator - PostgreSQL
+LOCATION: Pune, India (Hybrid)
+EMPLOYMENT TYPE: Full-time
+
+ABOUT THE COMPANY:
+E-commerce platform with 10M+ monthly active users, processing ₹500Cr+ GMV annually.
+
+RESPONSIBILITIES:
+- Manage 50+ PostgreSQL clusters (TB-scale data)
+- Design high-availability solutions (Patroni, repmgr)
+- Perform query optimization and index tuning
+- Implement backup/restore strategies (pgBackRest, WAL archiving)
+- Manage database migrations with minimal downtime
+- Monitor database performance (pg_stat_statements, Prometheus)
+- Handle database security and access control
+
+REQUIRED SKILLS (Must-have):
+- 5+ years PostgreSQL experience
+- Streaming replication and failover
+- PostgreSQL tuning (work_mem, shared_buffers, effective_cache_size)
+- PL/pgSQL and complex query writing
+- Linux administration
+- Backup automation (cron, shell scripts)
+
+NICE-TO-HAVE SKILLS:
+- Patroni + etcd for HA
+- Citus or TimescaleDB
+- AWS RDS Aurora
+- Database sharding strategies
+- Redis or Memcached experience
+
+EDUCATION & EXPERIENCE:
+- Bachelor's in CS/IT
+- 5-10 years DBA experience

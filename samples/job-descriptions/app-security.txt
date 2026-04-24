@@ -1,0 +1,35 @@
+JOB TITLE: Security Engineer - AppSec & Compliance
+LOCATION: Chennai, India (On-site)
+EMPLOYMENT TYPE: Full-time
+
+ABOUT THE COMPANY:
+Leading digital bank serving 50M+ customers across India.
+
+RESPONSIBILITIES:
+- Conduct security assessments and penetration testing
+- Implement SAST/DAST in CI/CD pipelines
+- Manage vulnerability remediation lifecycle
+- Design authentication systems (OAuth2, OIDC, SAML)
+- Ensure PCI-DSS and RBI compliance
+- Build security monitoring dashboards (SIEM)
+- Respond to security incidents
+
+REQUIRED SKILLS (Must-have):
+- 4+ years application security experience
+- OWASP Top 10 knowledge
+- Penetration testing tools (Burp Suite, Metasploit)
+- SAST tools (SonarQube, Checkmarx, Snyk)
+- Cloud security (AWS IAM, KMS, WAF)
+- Python or Bash scripting
+- JWT, OAuth2, TLS/SSL
+
+NICE-TO-HAVE SKILLS:
+- Kubernetes security (OPA, Kyverno)
+- Bug bounty experience
+- OSCP, CEH, or CISSP certification
+- Zero-trust architecture
+- Web3/blockchain security
+
+EDUCATION & EXPERIENCE:
+- Bachelor's in CS/Cybersecurity
+- 4-8 years security engineering
